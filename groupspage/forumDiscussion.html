@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900&display=swap" rel="stylesheet">
+    <title>Forum Discussion</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: #3b3b3b;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: none;
+        }
+        .navbar .logo {
+            font-size: 48px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-left: 100px;
+            padding: 20px;
+            text-decoration: none;
+            color: #F7F7F7;
+            opacity: 0.7;
+            transition: all ease 300ms;
+        }
+        .navbar .logo:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            margin-right: 100px;
+        }
+        .navbar-links a {
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: #F7F7F7;
+            opacity: 0.7;
+            text-decoration: none;
+            margin-left: 50px;
+            transition: all ease 300ms;
+        }
+        .navbar-links a:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #D9D9D9;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #sidebar {
+            width: 25%;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            padding: 20px;
+            background-color: rgba(247, 247, 247, 0.5);
+            border-right: 1px solid #ccc;
+        }
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            margin-bottom: 10px;
+        }
+        #sidebar ul li a {
+            text-decoration: none;
+            color: #1b1b1b;
+        }
+        .dropdown-content {
+            display: none;
+            padding-left: 20px;
+        }
+        .dropdown-content a {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .dropdown-toggle::after {
+            content: ' ▼';
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .expanded .dropdown-toggle::after {
+            content: ' ▲';
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 150px);
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(247, 247, 247, 0.5);
+        }
+        .group-chat-box {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #D9D9D9;
+            border-radius: 70px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            width: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1b1b1b;
+        }
+        .group-chat-box:hover {
+            background-color: #ccc;
+        }
+        .group-chat-box img {
+            width: 40px;
+            height: 40px;
+            border-radius: 80%;
+            margin-right: 10px;
+        }
+        .chat-content {
+            flex: 1;
+            color: #1b1b1b;
+        }
+        .chat-content p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .time-elapsed {
+            font-size: 8px;
+            color: #888;
+            margin-right: 10px;
+        }
+        #contentWithExpert {
+            flex: 1;
+            padding: 50px;
+            overflow-y: auto; 
+            max-height: calc(100vh - 150px); 
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+        }
+        #groupChatContainer {
+            display: none;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #D9D9D9;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        #groupChatHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        #messageList {
+            list-style: none;
+            padding: 0;
+            border: 1px solid #ddd;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        #messageList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        #messageList li:last-child {
+            border-bottom: none;
+        }
+        .message-input-container {
+            display: flex;
+        }
+        .message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .send-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-button:hover {
+            background-color: #218838;
+        }
+        .footer {
+            background-color: #3b3b3b;
+            color: #F7F7F7;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            grid-template-columns: 2;
+            margin-top: 100px;
+        }
+        .footerLeft,
+        .footerRight {
+            flex: 1;
+            padding: 10px 200px;
+        }
+        .footerRight {
+            flex: 1;
+            right: 10%;
+        }
+        .footerLeft h1 {
+            margin-bottom: 20px;
+        }
+        .footerLeft h2,
+        .footerLeft h3,
+        .footerRight h2,
+        .footerRight h3 {
+            margin: 10px 0;
+        }
+        .footerRight li {
+            list-style: none;
+        }
+        .footerRight a {
+            color: white;
+            text-decoration: none;
+        }
+        .footerRight h2 {
+            margin-bottom: 20px;
+        }
+        .footerRight h3 {
+            margin-bottom: 10px;
+        }
+        .footerRight ul {
+            padding-left: 0;
+            margin: 0;
+        }
+        .footerRight ul li {
+            margin-bottom: 5px;
+        }
+        .footerRight ul li a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .footerRight h3 {
+            margin-top: 20px;
+        }
+        .footerRight ul.social-icons {
+            display: flex;
+            align-items: center;
+        }
+        .footerRight ul.social-icons li {
+            margin-right: 20px;
+        }
+        .footerRight .social-icons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .footerRight .social-link {
+            margin-right: 20px;
+        }
+        .footerRight .social-link:last-child {
+            margin-right: 0;
+        }
+        .footerRight .social-link h3 {
+            display: inline;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="../homepage/index.html" class="logo">TMPOE</a>
+    <div class="navbar-links">
+        <a href="../studypage/index.html">Study</a>
+        <a href="../goalspage/index.html">Goals</a>
+        <a href="../groupspage/forumDiscussion.html">Groups</a>
+        <a href="../helppage/ResolveProblemPagee.html">Help</a>
+    </div>
+</nav>
+
+<div class="container" id="groupListContainer">
+    <div id="sidebar">
+        <h2>Group Discussion</h2>
+        <ul>
+            <li><a href="#" onclick="showContent('home')">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" onclick="toggleDropdown(this)">Group</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showContent('whatsNew')">What's New?</a>
+                    <a href="#" onclick="showContent('recentlyDiscussed')">Recently Discussed</a>
+                    <a href="#" onclick="showContent('discussWithExpert')">Discuss with Expert</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="homeContent" class="content-section">
+            <h2>Home</h2>
+            <p>Welcome to the home page of the forum discussion.</p>
+        </div>
+        <div id="whatsNewContent" class="content-section" style="display: none;">
+            <h2>What's New?</h2>
+            <p>Check out the latest updates and discussions.</p>
+            <div id="contentWhatsNew">
+                <div class="group-chat-box" onclick="openGroupChat('group1')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP A:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group2')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP B:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group3')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP C:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group4')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP D:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group5')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP E:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group6')">
+                    <img src="../assets/Ellipse 8.png" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>GROUP F:</strong> "TITLE : This is a new discussion."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="recentlyDiscussedContent" class="content-section" style="display: none;">
+            <h2>Recently Discussed</h2>
+            <p>Recent group chat discussions and topics.</p>
+            <div id="contentRecentlyDiscussed">
+                <div class="group-chat-box" onclick="openGroupChat('group1')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group A:</strong> "TITLE".</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>5 minutes ago</p>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group2')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group B:</strong> "TITLE" 2.</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>7 minutes ago</p>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group3')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group C:</strong> "TITLE" 2.</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>8 minutes ago</p>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group4')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group D:</strong> "TITLE" 2.</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>9 minutes ago</p>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group5')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group E:</strong> "TITLE" 2.</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>12 minutes ago</p>
+                </div>
+                <div class="group-chat-box" onclick="openGroupChat('group6')">
+                    <img src="https://via.placeholder.com/50" alt="Placeholder Image">
+                    <div class="chat-content">
+                        <p><strong>Group F:</strong> "TITLE" 2.</p>
+                    </div>
+                    <p class="time-elapsed" style="font-size: 8px;">you replied<br>15 minutes ago</p>
+                </div>
+            </div>
+        </div>
+        <div id="discussWithExpertContent" class="content-section" style="display: none;">
+            <h2>Discuss with Expert</h2>
+            <p>Engage in discussions with experts in various fields.</p>
+            <div id="contentWithExpert">
+                <div class="box">
+                    <img src="../assets/beautiful-back-to-school-background-images-made-with-generative-ai-photo 1.png" alt="Placeholder Image">
+                    <p>Description 1</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L25zMTkzNDYtaW1hZ2Uta3d2eWIzYnQuanBn 1.png" alt="Placeholder Image">
+                    <p>Description 2</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/what-background-study-how-to-write 1.png" alt="Placeholder Image">
+                    <p>Description 3</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L25zMTkzNDYtaW1hZ2Uta3d2eWIzYnQuanBn 1.png" alt="Placeholder Image">
+                    <p>Description 4</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/what-background-study-how-to-write 1.png" alt="Placeholder Image">
+                    <p>Description 5</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/beautiful-back-to-school-background-images-made-with-generative-ai-photo 1.png" alt="Placeholder Image">
+                    <p>Description 6</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L25zMTkzNDYtaW1hZ2Uta3d2eWIzYnQuanBn 1.png" alt="Placeholder Image">
+                    <p>Description 7</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+                <div class="box">
+                    <img src="../assets/beautiful-back-to-school-background-images-made-with-generative-ai-photo 1.png" alt="Placeholder Image">
+                    <p>Description 8</p>
+                    <p style="font-size: x-small;">Description text about the expert </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="groupChatContainer">
+    <div id="groupChatHeader">
+        <h2 id="groupChatTitle"></h2>
+        <button onclick="closeGroupChat()">Close</button>
+    </div>
+    <ul id="messageList" class="message-list"></ul>
+    <div class="message-input-container">
+        <input type="text" id="messageInput" class="message-input" placeholder="Type your message...">
+        <button id="sendButton" class="send-button">Send</button>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footerLeft">
+        <h1>Need Help?</h1>
+        <h2>Contact Us</h2>
+        <h3>+62 2002 3232 121</h3>
+        <h3>customerservice@tmpoe.com</h3>
+        <h3>Others</h3>
+        <h3>Privacy</h3>
+        <h3>User Data & Security</h3>
+    </div>
+    <div class="footerRight">
+        <h2>Follow us on<br>Social Media</h2>
+        <h3>Tiktok</h3>
+        <ul>
+            <li><a href="#">@tmpoe.id</a></li>
+            <li><a href="#">@tmpoe</a></li>
+        </ul>
+        <h3>Instagram</h3>
+        <ul>
+            <li><a href="#">@tmpoe.id</a></li>
+            <li><a href="#">@tmpoe</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    const groups = {
+        group1: { name: 'Group A', messages: [] },
+        group2: { name: 'Group B', messages: [] },
+        group3: { name: 'Group C', messages: [] },
+        group4: { name: 'Group D', messages: [] },
+        group5: { name: 'Group E', messages: [] },
+        group6: { name: 'Group F', messages: [] },
+    };
+
+    function toggleDropdown(toggle) {
+        const dropdownContent = toggle.nextElementSibling;
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        toggle.classList.toggle('expanded');
+    }
+
+    function showContent(contentId) {
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(contentId + 'Content').style.display = 'block';
+    }
+
+    function openGroupChat(groupId) {
+        const group = groups[groupId];
+        document.getElementById('groupChatTitle').innerText = group.name;
+        const messageList = document.getElementById('messageList');
+        messageList.innerHTML = '';
+        group.messages.forEach(msg => {
+            const li = document.createElement('li');
+            li.textContent = msg.text;
+            const timeElapsed = document.createElement('p');
+            timeElapsed.classList.add('time-elapsed');
+            timeElapsed.textContent = `you replied ${getTimeElapsed(msg.time)} ago`;
+            li.appendChild(timeElapsed);
+            messageList.appendChild(li);
+        });
+        document.getElementById('groupListContainer').style.display = 'none';
+        document.getElementById('groupChatContainer').style.display = 'flex';
+        updateGroupChatBoxes();
+    }
+
+    function closeGroupChat() {
+        document.getElementById('groupListContainer').style.display = 'flex';
+        document.getElementById('groupChatContainer').style.display = 'none';
+    }
+
+    document.getElementById('sendButton').addEventListener('click', () => {
+        const messageInput = document.getElementById('messageInput');
+        const messageText = messageInput.value.trim();
+        if (messageText) {
+            const groupName = document.getElementById('groupChatTitle').innerText;
+            const groupId = Object.keys(groups).find(key => groups[key].name === groupName);
+            const messageTime = new Date();
+            groups[groupId].messages.push({ text: messageText, time: messageTime });
+            const li = document.createElement('li');
+            li.textContent = messageText;
+            const timeElapsed = document.createElement('p');
+            timeElapsed.classList.add('time-elapsed');
+            timeElapsed.textContent = `you replied ${getTimeElapsed(messageTime)} ago`;
+            li.appendChild(timeElapsed);
+            document.getElementById('messageList').appendChild(li);
+            messageInput.value = '';
+            updateGroupChatBoxes();
+        }
+    });
+
+    document.getElementById('messageInput').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            document.getElementById('sendButton').click();
+        }
+    });
+
+    function getTimeElapsed(date) {
+        const now = new Date();
+        const diffInMs = now - new Date(date);
+        const diffInMinutes = Math.floor(diffInMs / 60000);
+        if (diffInMinutes < 1) {
+            return 'just now';
+        } else if (diffInMinutes === 1) {
+            return '1 minute';
+        } else if (diffInMinutes < 60) {
+            return `${diffInMinutes} minutes`;
+        } else {
+            const diffInHours = Math.floor(diffInMinutes / 60);
+            if (diffInHours === 1) {
+                return '1 hour';
+            } else if (diffInHours < 24) {
+                return `${diffInHours} hours`;
+            } else {
+                const diffInDays = Math.floor(diffInHours / 24);
+                if (diffInDays === 1) {
+                    return '1 day';
+                } else {
+                    return `${diffInDays} days`;
+                }
+            }
+        }
+    }
+
+    function updateGroupChatBoxes() {
+        document.querySelectorAll('.group-chat-box').forEach(box => {
+            const groupId = box.getAttribute('onclick').match(/'(.+)'/)[1];
+            const group = groups[groupId];
+            if (group.messages.length > 0) {
+                const lastMessageTime = group.messages[group.messages.length - 1].time;
+                box.querySelector('.time-elapsed').textContent = `you replied ${getTimeElapsed(lastMessageTime)} ago`;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

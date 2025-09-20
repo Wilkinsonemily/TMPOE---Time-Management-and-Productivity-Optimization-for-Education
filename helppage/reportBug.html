@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Bug</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #3b3b3b;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: none;
+            
+        }
+        .navbar .logo {
+            font-size: 48px;
+            font-family: 'Playfair Display',serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-left: 100px;
+            padding: 20px;
+            text-decoration: none;
+            color: #F7F7F7;
+            opacity: 0.7;
+            transition: all ease 300ms;
+        }
+        .navbar .logo:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            margin-right: 100px;
+        }
+        .navbar-links a {
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: #F7F7F7;
+            opacity: 0.7;
+            text-decoration: none;
+            margin-left: 50px;
+            transition: all ease 300ms;
+        }
+        .navbar-links a:hover {
+            opacity: 1;
+            color: #FFFFFF;
+
+        }
+        .container {
+            padding: 50px 100px;
+        }
+        .report-bug-form {
+            background-color: #FFF;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .report-bug-form h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        .submit-btn {
+            background-color: #F0A967;
+            color: #FFF;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #D98646;
+        }
+        .footer {
+            background-color: #3b3b3b;
+            color: #F7F7F7;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            grid-template-columns: 2;
+        }
+        .footerLeft,
+        .footerRight {
+            flex: 1;
+            padding: 10px 200px;
+        }
+
+        .footerRight {
+            flex: 1;
+            right: 10%;
+        }
+        .footerLeft h1 {
+            margin-bottom: 20px;
+        }
+        .footerLeft h2,
+        .footerLeft h3,
+        .footerRight h2,
+        .footerRight h3 {
+            margin: 10px 0;
+        }
+        .footerRight li {
+            list-style: none;
+        }
+        .footerRight a {
+            color: white;
+            text-decoration: none;
+        }
+        .footerRight h2 {
+            margin-bottom: 20px;
+        }
+        .footerRight h3 {
+            margin-bottom: 10px;
+        }
+        .footerRight ul {
+            padding-left: 0;
+            margin: 0; 
+        }
+        .footerRight ul li {
+            margin-bottom: 5px;
+        }
+        .footerRight ul li a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .footerRight h3 {
+            margin-top: 20px; 
+        }
+        .footerRight ul.social-icons {
+            display: flex;
+            align-items: center;
+        }
+        .footerRight ul.social-icons li {
+            margin-right: 20px;
+        }
+
+        .footerRight .social-icons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .footerRight .social-link {
+            margin-right: 20px;
+        }
+
+        .footerRight .social-link:last-child {
+            margin-right: 0;
+        }
+
+        .footerRight .social-link h3 {
+            display: inline;
+            margin-right: 5px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 2px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .popup h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #F0A967;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .popup button:hover {
+            background-color: #D98646;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../homepage/index.html" class="logo">TMPOE</a>
+        <div class="navbar-links">
+            <a href="../studypage/index.html">Study</a>
+            <a href="../goalspage/index.html">Goals</a>
+            <a href="../groupspage/forumDiscussion.html">Groups</a>
+            <a href="../helppage/ResolveProblemPagee.html">Help</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="report-bug-form">
+            <h2>Report a Bug</h2>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="bug-description">Bug Description</label>
+                    <textarea id="bug-description" name="bug-description" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footerLeft">
+            <h1>Need Help?</h1>
+            <h2>Contact Us</h2>
+            <h3>+62 2002 3232 121</h3>
+            <h3>customerservice@tmpoe.com</h3>
+            <h3>Others</h3>
+            <h3>Privacy</h3>
+            <h3>User Data & Security</h3>
+        </div>
+        <div class="footerRight">
+            <h2>Follow us on<br>Social Media</h2>
+            <h3>Tiktok</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+            <h3>Instagram</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h3>Thank you for your report!</h3>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+            
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('bug-description').value = '';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

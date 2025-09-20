@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="hero-section">
+        <nav class="navbar">
+            <a href="../homepage/index.html" class="logo">TMPOE</a>
+            <div class="navbar-links">
+                <a href="../studypage/index.html">Study</a>
+                <a href="../goalspage/index.html">Goals</a>
+                <a href="../groupspage/forumDiscussion.html">Groups</a>
+                <a href="../helppage/ResolveProblemPagee.html">Help</a>
+            </div>
+        </nav>
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>Shoot for the moon.<br>
+                    Dream big!
+                </h1>
+                <p>“Talent without hardwork
+                    means nothing” -<br>
+                    Cristiano Ronaldo</p>
+            </div>
+            
+        </div>
+    </section>
+    <section class="content-container">
+        <div class="outer-container" id="whole">
+            <div class="form-container">
+                
+                <div id="step1" class="step">
+                    <h2>1/3</h2>
+                    
+                    <div class="question-container">
+                        <p>Give a name for your goal</p>
+                        <input type="text" id="goalName">
+                    </div>
+                
+                    <div class="question-container">
+                        <p>Give a short description for your goal</p>
+                        <input type="text" id="goalDescription">
+                    </div>
+                
+                    <div class="question-container">
+                        <p>What exactly do you want to achieve with this goal?</p>
+                        <input type="text" id="achieveDescription">
+                    </div>
+                
+                    <button id="continueButton1" class="continue">Continue</button>
+                </div>
+                <div id="step2" class="step" style="display: none;">
+                    <h2>2/3</h2>
+                    
+                    <div class="question-container">
+                        <p>How many hours to spend each day on this goal?</p>
+                        <select class="time-option" id="dailyHours">
+                            <option value="< 1 hour">< 1 hour</option>
+                            <option value="2-3 hours">2-3 hours</option>
+                            <option value="3-6 hours">3-6 hours</option>
+                            <option value="6-10 hours">6-10 hours</option>
+                            <option value="> 10 hours">> 10 hours</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question-container">
+                        <p>What's the minimum number of hours per week spent on this goal?</p>
+                        <select class="time-option" id="weeklyHours">
+                            <option value="5 hours">5 hours</option>
+                            <option value="10 hours">10 hours</option>
+                            <option value="15 hours">15 hours</option>
+                            <option value="20 hours">20 hours</option>
+                            <option value="25 hours">25 hours</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question-container">
+                        <p>Do you rest on weekends?</p>
+                        <select class="option" id="restOnWeekends">
+                            <option value="Always">Always</option>
+                            <option value="Sometimes">Sometimes</option>
+                            <option value="Never">Never</option>
+                        </select>
+                    </div>
+                    
+                    <button id="continueButton2" class="continue">Continue</button>
+                </div>
+                <div id="step3" class="step" style="display: none;">
+                    <h2>3/3</h2>
+                    
+                    <div class="question-container">
+                        <p>When do you want to achieve your goal by?</p>
+                        <select class="time-option" id="goalTimeframe">
+                            <option value="1 month">1 month</option>
+                            <option value="6 months">6 months</option>
+                            <option value="1 year">1 year</option>
+                            <option value="2 years">2 years</option>
+                            <option value="> 2 years">> 2 years</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question-container">
+                        <p>Receive daily reminders from us?</p>
+                        <select class="option" id="reminderFrequency">
+                            <option value="Never">Never</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                        </select>
+                    </div>
+                    
+                    <button id="finishButton" class="continue">Finish</button>
+                </div>
+            
+            </div>
+            <div id="summary" class="summ" style="display: none;">
+                <div class="left-part">
+                    <p>Thank you for setting your goal!<br>
+                        Schedule successfully generated</p>
+                </div>
+                <div class="right-part">
+                    <button id="generateExcelButton">Download Schedule</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footerLeft">
+            <h1>Need Help?</h1>
+            <h2>Contact Us</h2>
+            <h3>+62 2002 3232 121</h3>
+            <h3>customerservice@tmpoe.com</h3>
+            <h3>Others</h3>
+            <h3>Privacy</h3>
+            <h3>User Data & Security</h3>
+        </div>
+        <div class="footerRight">
+            <h2>Follow us on<br>Social Media</h2>
+            <h3>Tiktok</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+            <h3>Instagram</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        const steps = document.querySelectorAll('.step');
+        const continueButtons = document.querySelectorAll('.continue');
+        const outerContainer = document.getElementById('whole');
+        let currentStep = 0;
+
+        // Add event listeners to input fields to store their values in localStorage
+        document.getElementById('goalName').addEventListener('input', function() {
+            localStorage.setItem('goalName', this.value);
+        });
+
+        document.getElementById('goalDescription').addEventListener('input', function() {
+            localStorage.setItem('goalDescription', this.value);
+        });
+
+        document.getElementById('achieveDescription').addEventListener('input', function() {
+            localStorage.setItem('achieveDescription', this.value);
+        });
+
+        // Add event listeners to time-option and option buttons to store their values in localStorage
+        document.querySelectorAll('.time-option').forEach(button => {
+            button.addEventListener('click', function() {
+                if (button.parentElement.previousElementSibling.textContent.includes('How many hours to spend each day')) {
+                    localStorage.setItem('dailyHours', this.value);
+                } else if (button.parentElement.previousElementSibling.textContent.includes('minimum number of hours per week')) {
+                    localStorage.setItem('weeklyHours', this.value);
+                } else if (button.parentElement.previousElementSibling.textContent.includes('When do you want to achieve your goal')) {
+                    localStorage.setItem('goalTimeframe', this.value);
+                }
+            });
+        });
+
+        document.querySelectorAll('.option').forEach(button => {
+            button.addEventListener('click', function() {
+                if (button.parentElement.previousElementSibling.textContent.includes('rest on weekends')) {
+                    localStorage.setItem('restOnWeekends', this.value);
+                } else if (button.parentElement.previousElementSibling.textContent.includes('Receive daily reminders')) {
+                    localStorage.setItem('reminderFrequency', this.value);
+                }
+            });
+        });
+
+        continueButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                steps[currentStep].style.display = 'none';
+                currentStep++;
+                if (currentStep < steps.length) {
+                    steps[currentStep].style.display = 'block';
+                }
+            });
+        });
+
+        document.getElementById('finishButton').addEventListener('click', function() {
+            outerContainer.style.flexDirection = 'column';
+            document.getElementById('summary').style.display = 'block';
+        });
+
+        function generateExcel() {
+            // Collect data from localStorage
+            const data = {
+                goalName: localStorage.getItem('goalName') || 'N/A',
+                goalDescription: localStorage.getItem('goalDescription') || 'N/A',
+                achieveDescription: localStorage.getItem('achieveDescription') || 'N/A',
+                dailyHours: localStorage.getItem('dailyHours') || 'N/A',
+                weeklyHours: localStorage.getItem('weeklyHours') || 'N/A',
+                restOnWeekends: localStorage.getItem('restOnWeekends') || 'N/A',
+                goalTimeframe: localStorage.getItem('goalTimeframe') || 'N/A',
+                reminderFrequency: localStorage.getItem('reminderFrequency') || 'N/A'
+            };
+
+            // Create a new workbook and a worksheet
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet([data]);
+
+            // Add worksheet to the workbook
+            XLSX.utils.book_append_sheet(wb, ws, 'Study Schedule');
+
+            // Export to Excel
+            XLSX.writeFile(wb, 'study_schedule.xlsx');
+        }
+
+        // Add event listener to the generate Excel button
+        document.getElementById('generateExcelButton').addEventListener('click', generateExcel);
+
+    </script>
+</body>
+</html>

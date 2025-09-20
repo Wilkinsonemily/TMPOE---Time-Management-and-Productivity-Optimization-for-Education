@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: #3b3b3b;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: none;
+            
+        }
+        .navbar .logo {
+            font-size: 48px;
+            font-family: 'Playfair Display',serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-left: 100px;
+            padding: 20px;
+            text-decoration: none;
+            color: #F7F7F7;
+            opacity: 0.7;
+            transition: all ease 300ms;
+        }
+        .navbar .logo:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            margin-right: 100px;
+        }
+        .navbar-links a {
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: #F7F7F7;
+            opacity: 0.7;
+            text-decoration: none;
+            margin-left: 50px;
+            transition: all ease 300ms;
+        }
+        .navbar-links a:hover {
+            opacity: 1;
+            color: #FFFFFF;
+
+        }
+        .banner {
+            background-color: #E0E0E0;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: bold; 
+            margin: 0 0 30px;
+            color: #000;
+        }
+        .subscription {
+            text-align: center;
+            padding: 50px 20px;
+            bottom: 50px;
+            margin-bottom: 50px;
+            background-color: rgba(204, 204, 204, 1);
+            padding-bottom: 200px;
+        }
+        .subscription table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .subscription th, .subscription td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .subscription th {
+            background-color: #3b3b3b;
+            color: white;
+            font-weight: bold;
+        }
+        .subscription tr:hover {
+            background-color: #ddd;
+        }
+        .footer {
+            background-color: #3b3b3b;
+            color: #F7F7F7;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            grid-template-columns: 2;
+        }
+        .footerLeft,
+        .footerRight {
+            flex: 1;
+            padding: 10px 200px;
+        }
+
+        .footerRight {
+            flex: 1;
+            right: 10%;
+        }
+        .footerLeft h1 {
+            margin-bottom: 20px;
+        }
+        .footerLeft h2,
+        .footerLeft h3,
+        .footerRight h2,
+        .footerRight h3 {
+            margin: 10px 0;
+        }
+        .footerRight li {
+            list-style: none;
+        }
+        .footerRight a {
+            color: white;
+            text-decoration: none;
+        }
+        .footerRight h2 {
+            margin-bottom: 20px;
+        }
+        .footerRight h3 {
+            margin-bottom: 10px;
+        }
+        .footerRight ul {
+            padding-left: 0;
+            margin: 0; 
+        }
+        .footerRight ul li {
+            margin-bottom: 5px;
+        }
+        .footerRight ul li a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .footerRight h3 {
+            margin-top: 20px; 
+        }
+        .footerRight ul.social-icons {
+            display: flex;
+            align-items: center;
+        }
+        .footerRight ul.social-icons li {
+            margin-right: 20px;
+        }
+
+        .footerRight .social-icons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .footerRight .social-link {
+            margin-right: 20px;
+        }
+
+        .footerRight .social-link:last-child {
+            margin-right: 0;
+        }
+
+        .footerRight .social-link h3 {
+            display: inline;
+            margin-right: 5px;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content p {
+            margin-bottom: 10px;
+        }
+
+        .popup-content p strong {
+            font-weight: bold;
+            font-size: x-large;
+            padding-right: 50px;
+            justify-content: left;
+        }
+
+        .popup-content p em {
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .popup-content button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-content button.cancel {
+            background-color: #DF5441;
+            color: white;
+            right: 10px;
+        }
+
+        .popup-content button.cancel:hover {
+            background-color: gray;
+        }
+
+        .popup-content button.return {
+            background-color: #363636;
+            color: white;
+        }
+
+        .popup-content button.return:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+    <body>
+        <nav class="navbar">
+            <a href="../homepage/index.html" class="logo">TMPOE</a>
+            <div class="navbar-links">
+                <a href="../studypage/index.html">Study</a>
+                <a href="../goalspage/index.html">Goals</a>
+                <a href="../groupspage/forumDiscussion.html">Groups</a>
+                <a href="../helppage/ResolveProblemPagee.html">Help</a>
+            </div>
+        </nav>
+        <section class="banner">
+            <h1>Subscription</h1>
+        </section>
+        <section class="subscription">
+            <h1>Your Subscription</h1>
+            <table>
+                <tr>
+    <th>Subscription</th>
+        <th>Status</th>
+        <th>Renewal Date</th>
+        <th>Initial Amount</th>
+        <th>Action</th>
+        </tr>
+        <tr>
+            <td>Premium - Personal Yearly</td>
+            <td>Payment failed</td>
+            <td>15 May 2024</td>
+            <td>Rp. 200.000</td>
+            <td><button onclick="showPopup()">Change</button></td>
+        </tr>
+        <tr>
+            <td>Premium - Personal Yearly</td>
+            <td>Inactive</td>
+            <td>15 May 2024</td>
+            <td>Rp. 200.000</td>
+            <td><button onclick="showPopup()">Change</button></td>
+        </tr>
+        <tr>
+            <td>Premium - Personal Yearly</td>
+            <td>Inactive</td>
+            <td>15 June 2024</td>
+            <td>Rp. 200.000</td>
+            <td><button onclick="showPopup()">Change</button></td>
+        </tr>
+        <tr>
+            <td>Premium - Personal Yearly</td>
+            <td>Active</td>
+            <td>15 July 2024</td>
+            <td>Rp. 200.000</td>
+            <td><button onclick="showPopup()">Change</button></td>
+        </tr>
+        </table>
+        </section>
+        <footer class="footer">
+            <div class="footerLeft">
+                <h1>Need Help?</h1>
+                <h2>Contact Us</h2>
+                <h3>+62 2002 3232 121</h3>
+                <h3>customerservice@tmpoe.com</h3>
+                <h3>Others</h3>
+                <h3>Privacy</h3>
+                <h3>User Data & Security</h3>
+            </div>
+            <div class="footerRight">
+                <h2>Follow us on<br>Social Media</h2>
+                <h3>Tiktok</h3>
+                <ul>
+                    <li><a href="#">@tmpoe.id</a></li>
+                    <li><a href="#">@tmpoe</a></li>
+                </ul>
+                <h3>Instagram</h3>
+                <ul>
+                    <li><a href="#">@tmpoe.id</a></li>
+                    <li><a href="#">@tmpoe</a></li>
+                </ul>
+            </div>
+        </footer>
+
+        <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <p><strong>You are about to annul your subscription</strong></p>
+            <p><em>Once your subscription expires you will lose access to premium features</em></p>
+            <p>Are you sure you want to annul your subscription?</p>
+            <button class="return" onclick="hidePopup()">Return</button>
+            <button class="cancel" onclick="cancelSubscription()">Cancel Subscription</button>
+        </div>
+        </div>
+
+        <script>
+        function showPopup() {
+        document.getElementById('popupOverlay').style.display = 'flex';
+        }
+        function hidePopup() {
+        document.getElementById('popupOverlay').style.display = 'none';
+        }
+        function cancelSubscription() {
+        alert("Your subscription has been cancelled.");
+        hidePopup(); 
+        }
+        </script>
+    </body>
+</html>
+            

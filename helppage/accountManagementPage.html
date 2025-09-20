@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900&display=swap" rel="stylesheet">
+    <title>Account Management - TMPOE</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: #3b3b3b;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: none;
+        }
+        .navbar .logo {
+            font-size: 48px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-left: 100px;
+            padding: 20px;
+            text-decoration: none;
+            color: #F7F7F7;
+            opacity: 0.7;
+            transition: all ease 300ms;
+        }
+        .navbar .logo:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            margin-right: 100px;
+        }
+        .navbar-links a {
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: #F7F7F7;
+            opacity: 0.7;
+            text-decoration: none;
+            margin-left: 50px;
+            transition: all ease 300ms;
+        }
+        .navbar-links a:hover {
+            opacity: 1;
+            color: #FFFFFF;
+        }
+        .container {
+            background-color: #D9D9D9;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .hero_section {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            align-items: center;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .container h3 {
+            color: #333;
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .profile-box, .info-box {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .profile-box .left, .profile-box .right, .info-box .left, .info-box .right {
+            flex: 1;
+            padding: 0 10px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[disabled], textarea[disabled] {
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .footer {
+            background-color: #3b3b3b;
+            color: #F7F7F7;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footerLeft, .footerRight {
+            flex: 1;
+            padding: 10px 50px;
+        }
+        .footerLeft h1, .footerLeft h2, .footerLeft h3, .footerRight h2, .footerRight h3 {
+            margin: 10px 0;
+        }
+        .footerRight ul {
+            padding-left: 0;
+            margin: 0;
+        }
+        .footerRight ul li {
+            margin-bottom: 5px;
+        }
+        .footerRight ul li a {
+            display: inline-block;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../homepage/index.html" class="logo">TMPOE</a>
+        <div class="navbar-links">
+            <a href="../studypage/index.html">Study</a>
+            <a href="../goalspage/index.html">Goals</a>
+            <a href="../groupspage/forumDiscussion.html">Groups</a>
+            <a href="../helppage/ResolveProblemPagee.html">Help</a>
+        </div>
+    </nav>
+    <div class="hero_section">
+        <h2 style="text-align: center;">Account Management</h2>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3>My Profile</h3>
+            <div class="profile-box">
+                <div class="left">
+                    <p id="profileNameDisplay"> <p id="profileRoleDisplay"> </p></p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h3>Personal Information</h3>
+            <div class="info-box">
+                <div class="left">
+                    <p>First Name</p>
+                    <input type="text" id="firstName" placeholder="First Name">
+                    <p>Email Address</p>
+                    <input type="email" id="email" placeholder="Email Address">
+                </div>
+                <div class="right">
+                    <p>Last Name</p>
+                    <input type="text" id="lastName" placeholder="Last Name">
+                    <p>Phone</p>
+                    <input type="text" id="phone" placeholder="Phone">
+                </div>
+            </div>
+            <p>Bio</p>
+            <textarea id="bio" placeholder="Bio"></textarea>
+            <button id="savePersonalInfoButton" class="hidden" onclick="savePersonalInfo()">Save Personal Information</button>
+        </div>
+        <div class="section">
+            <h3>Change Password</h3>
+            <input type="password" id="oldPassword" placeholder="Old Password">
+            <input type="password" id="newPassword" placeholder="New Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm New Password">
+            <p>Password must contain:</p>
+            <ul>
+                <li>At least 8 characters</li>
+                <li>At least 1 uppercase letter (A-Z)</li>
+                <li>At least 1 number (0-9)</li>
+            </ul>
+            <button onclick="changePassword()">Save</button>
+        </div>
+        <div class="section">
+            <h3>Log In Issue</h3>
+            <p>Input your Gmail, then we will send you an option to change your password through your Gmail</p>
+            <input type="email" id="forgotEmail" placeholder="Enter your Gmail" required>
+            <button onclick="forgotPassword()">Send</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footerLeft">
+            <h1>Need Help?</h1>
+            <h2>Contact Us</h2>
+            <h3>+62 2002 3232 121</h3>
+            <h3>customerservice@tmpoe.com</h3>
+            <h3>Others</h3>
+            <h3>Privacy</h3>
+            <h3>User Data & Security</h3>
+        </div>
+        <div class="footerRight">
+            <h2>Follow us on<br>Social Media</h2>
+            <h3>Tiktok</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+            <h3>Instagram</h3>
+            <ul>
+                <li><a href="#">@tmpoe.id</a></li>
+                <li><a href="#">@tmpoe</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+        });
+
+        function loadProfile() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('bio').value;
+
+            document.getElementById('profileNameDisplay').innerText = `${firstName} ${ lastName}`;
+            document.getElementById('profileRoleDisplay').innerText = `${email}`;   
+        }
+
+        function editPersonalInfo() {
+            const inputs = document.querySelectorAll('.info-box input');
+            inputs.forEach(input => input.disabled = false);
+            document.getElementById('savePersonalInfoButton').classList.remove('hidden');
+        }
+
+        function savePersonalInfo() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            if (firstName && lastName && email && phone) {
+                alert('Personal information saved successfully');
+                const inputs = document.querySelectorAll('.info-box input');
+                inputs.forEach(input => input.disabled = true);
+                document.getElementById('savePersonalInfoButton').classList.add('hidden');
+                loadProfile();
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        function changePassword() {
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (newPassword && newPassword.length >= 8 && /[A-Z]/.test(newPassword) && /[0-9]/.test(newPassword)) {
+                if (newPassword === confirmPassword) {
+                    alert('Password changed successfully');
+                } else {
+                    alert('New passwords do not match');
+                }
+            } else {
+                alert('New password does not meet the requirements');
+            }
+        }
+
+        function forgotPassword() {
+            const email = document.getElementById('forgotEmail').value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+            if (email && emailPattern.test(email)) {
+                alert('Password reset option has been sent to your email');
+            } else {
+                alert('Please enter a valid Gmail address');
+            }
+        }
+    </script>
+</body>
+</html>
