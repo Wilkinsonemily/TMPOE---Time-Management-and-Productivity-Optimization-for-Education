@@ -2,6 +2,9 @@
 
 TMPOE is a web application designed to help students and professionals manage their time effectively, set academic goals, and improve overall productivity. The project focuses on user-centered design and integrates multiple features to support personalized learning and task management.
 
+## Live Website
+- **GitHub Pages:** https://wilkinsonemily.github.io/TMPOE---Time-Management-and-Productivity-Optimization-for-Education/
+
 ---
 
 ## Problem Statement
@@ -104,5 +107,5 @@ TMPOE is implemented as a web application with:
 ---
 
 ## Note
-This project is primarily based on design and concept for improving productivity and time management, focusing on user-centered solutions for learners and professionals.
+This project focuses on user-centered solutions for learning productivity and time management. Future improvements may include performance optimizations, more interactive onboarding/tutorials, and richer progress tracking.
 
